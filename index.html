@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Trust Travel - Egypt Transportation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span class="logo-icon">🚎</span> HIGH TRUST TRAVEL
+        </div>
+        <nav>
+            <a href="#" data-en="Services" data-ar="الخدمات">Services</a>
+            <a href="#" data-en="Fleet" data-ar="الأسطول">Fleet</a>
+            <a href="#" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+        </nav>
+        <button class="settings-btn" id="settingsBtn" title="Settings">⚙️</button>
+    </header>
+
+    <section class="hero">
+        <h1 data-en="Travel Egypt with Confidence. High Trust Transportation." data-ar="سافر في مصر بثقة. هاي تراست للنقل.">
+            Travel Egypt with Confidence. High Trust Transportation.
+        </h1>
+        <div class="booking-widget">
+            <p data-en="Request a Quote" data-ar="اطلب عرض سعر">Request a Quote</p>
+            <button class="primary-btn" data-en="Book Now" data-ar="احجز الآن">Book Now</button>
+        </div>
+    </section>
+
+    <main class="content-container" id="mainContent">
+        <article class="text-content">
+            <div class="language-content en-content" dir="ltr">
+                <h2>🚌 High Trust Travel: Egypt Transportation Services</h2>
+                <p>Welcome to <strong>High Trust Travel</strong>, your dedicated partner for <strong>reliable and high-quality transportation services</strong> across Egypt. We are based locally and committed to ensuring every journey—whether for tourism, business, or personal travel—is executed with <strong>comfort, punctuality, and the highest level of trust.</strong></p>
+                
+                <h3>Why Choose High Trust Travel for Transportation?</h3>
+                <ul>
+                    <li><strong>Modern Bus Fleet:</strong> Our inventory features a range of modern, air-conditioned buses and coaches suitable for groups of all sizes.</li>
+                    <li><strong>Professional Drivers:</strong> Experienced, licensed, and courteous drivers committed to safe transit and timely arrivals.</li>
+                    <li><strong>Nationwide Coverage:</strong> Offering private transfers and bus charters between all major Egyptian cities.</li>
+                    <li><strong>High Trust Guarantee:</strong> We pride ourselves on transparent pricing and dependable scheduling.</li>
+                </ul>
+                <p class="slogan-line"><strong>Your Destination is Our Priority. Travel Egypt with Confidence.</strong></p>
+            </div>
+
+            <div class="language-content ar-content hidden" dir="rtl">
+                <h2>🚌 هاي تراست ترافل: خدمات النقل في مصر</h2>
+                <p>مرحبًا بكم في <strong>هاي تراست ترافل</strong>، شريكك المتخصص لخدمات النقل الموثوقة وعالية الجودة في جميع أنحاء جمهورية مصر العربية. نحن شركة محلية مقرها في مصر، ونلتزم بضمان أن تكون كل رحلة مريحة، دقيقة، وتتم بأعلى مستويات الثقة.</p>
+                
+                <h3>لماذا تختار هاي تراست ترافل للنقل؟</h3>
+                <ul>
+                    <li><strong>أسطول حافلات حديث:</strong> نمتلك مجموعة واسعة من الحافلات والمركبات المكيفة والحديثة المناسبة لمختلف أحجام المجموعات.</li>
+                    <li><strong>سائقون محترفون:</strong> سائقونا يتمتعون بالخبرة، الترخيص، وحسن التعامل، وهم ملتزمون بالقيادة الآمنة والوصول في المواعيد المحددة.</li>
+                    <li><strong>تغطية شاملة:</strong> نقدم خدمات النقل الخاص وحجز الحافلات بين جميع المدن المصرية الرئيسية.</li>
+                    <li><strong>ضمان الثقة العالية:</strong> "هاي تراست" هو وعدنا بالشفافية في الأسعار والاعتمادية في الجدول الزمني.</li>
+                </ul>
+                <p class="slogan-line"><strong>وجهتك هي أولويتنا. سافر في مصر بثقة.</strong></p>
+            </div>
+        </article>
+    </main>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 data-en="Accessibility & Preferences" data-ar="إعدادات الوصول والتفضيلات">Accessibility & Preferences</h3>
+
+            <div class="setting-group">
+                <p data-en="Select Language:" data-ar="اختر اللغة:">Select Language:</p>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="language" value="en" checked> English
+                    </label>
+                    <label>
+                        <input type="radio" name="language" value="ar"> العربية
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <p data-en="Font Size:" data-ar="حجم الخط:">Font Size:</p>
+                <div class="font-controls">
+                    <button id="font-small">A-</button>
+                    <button id="font-medium">A</button>
+                    <button id="font-large">A+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const html = document.documentElement;
+        const settingsModal = document.getElementById('settingsModal');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const closeBtn = document.querySelector('.close-btn');
+        const langRadios = document.querySelectorAll('input[name="language"]');
+        const fontSmall = document.getElementById('font-small');
+        const fontMedium = document.getElementById('font-medium');
+        const fontLarge = document.getElementById('font-large');
+        const content = document.getElementById('mainContent');
+
+        // --- Modal Control ---
+        settingsBtn.onclick = () => settingsModal.style.display = 'block';
+        closeBtn.onclick = () => settingsModal.style.display = 'none';
+        window.onclick = (event) => {
+            if (event.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+        }
+
+        // --- Language Control ---
+        function switchLanguage(lang) {
+            html.lang = lang;
+            html.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+            // Show/Hide main content
+            document.querySelectorAll('.language-content').forEach(el => el.classList.add('hidden'));
+            document.querySelector(`.${lang}-content`).classList.remove('hidden');
+
+            // Update all elements with data- attributes
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+        }
+
+        langRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => switchLanguage(e.target.value));
+        });
+
+        // Set initial state
+        switchLanguage('en'); 
+
+        // --- Font Size Control ---
+        function setFontSize(size) {
+            content.style.fontSize = size;
+        }
+
+        fontSmall.onclick = () => setFontSize('0.85em');
+        fontMedium.onclick = () => setFontSize('1em'); // Default
+        fontLarge.onclick = () => setFontSize('1.25em');
+    </script>
+    </main>
+
+    <div class="bottom-contact-bar">
+        <h4 class="contact-text-h4">هتحط رقمك هنا و الايميل</h4>
+    </div>
+</body>
+</html>

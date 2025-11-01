@@ -1,0 +1,358 @@
+/* --- THEME COLORS & BASE STYLES --- */
+:root {
+    /* New Palette: Ancient Sandstone & Nile Green */
+    --primary-color: #28282A; /* Basalt Black / Deep Charcoal */
+    --primary-light: #3D3D3F; /* Slightly lighter basalt for gradients */
+    --accent-color: #D4AF37;  /* Sandstone Gold */
+    --secondary-accent: #008080; /* Nile Green */
+    --secondary-accent-dark: #006060; /* Darker Nile Green for gradients */
+    --background-color: #FDF5E6; /* Pale Cream/Sand */
+    --light-gray: #eee;
+    --text-color: #333333;
+    --white: #ffffff;
+}
+
+/* Base Font Setup */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Apply Arabic Font when language is set to RTL */
+html[dir="rtl"] body {
+    font-family: 'Noto Sans Arabic', sans-serif;
+}
+
+/* Global Content Container Styling */
+.content-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    transition: font-size 0.3s ease;
+}
+
+/* Hidden Class for Language Toggle */
+.hidden {
+    display: none !important;
+}
+
+/* --- 1. HEADER & NAVIGATION --- */
+header {
+    background: linear-gradient(to right, var(--primary-color), var(--primary-light)); /* Linear Gradient */
+    color: var(--white);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo-icon {
+    color: var(--accent-color);
+    margin-right: 5px;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+.settings-btn {
+    background: none;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    font-size: 1.2em;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.settings-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* --- 2. HERO SECTION --- */
+.hero {
+    background: url('https://via.placeholder.com/1500x400/987654/ffffff?text=Egyptian+Road+Trip') no-repeat center center/cover; /* Placeholder image - replace with a real one */
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, var(--secondary-accent-dark) 0%, var(--primary-color) 100%); /* Linear Gradient Overlay */
+    opacity: 0.7; /* Adjust opacity as needed for text readability */
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.booking-widget {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.booking-widget p {
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.primary-btn {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 10px 25px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #EBC85B; /* Lighter Sandstone */
+}
+
+/* --- 3. MAIN CONTENT STYLES --- */
+.text-content {
+    padding: 40px 0;
+}
+
+.text-content h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.text-content h3 {
+    color: var(--secondary-accent);
+    margin-top: 30px;
+    font-size: 1.4em;
+}
+
+.text-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.text-content li {
+    background-color: var(--light-gray);
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-left: 5px solid var(--accent-color);
+}
+
+.slogan-line {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--secondary-accent);
+    padding: 20px;
+    border: 1px dashed var(--accent-color);
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* RTL Adjustments */
+html[dir="rtl"] .text-content li {
+    border-left: none;
+    border-right: 5px solid var(--accent-color);
+    text-align: right;
+}
+
+html[dir="rtl"] nav a {
+    margin-right: 20px;
+    margin-left: 0;
+}
+
+/* --- 4. MODAL STYLING --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: var(--background-color);
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid var(--primary-color);
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.setting-group {
+    margin-bottom: 20px;
+}
+
+.setting-group p {
+    font-weight: 700;
+    color: var(--secondary-accent);
+    margin-bottom: 10px;
+}
+
+/* Radio Button Group */
+.radio-group label {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+/* Font Controls */
+.font-controls button {
+    background-color: var(--light-gray);
+    border: 1px solid var(--secondary-accent);
+    color: var(--secondary-accent);
+    padding: 5px 10px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.2s;
+}
+
+.font-controls button:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border-color: var(--accent-color);
+}
+
+/* --- 5. BOTTOM CONTACT BAR --- */
+.bottom-contact-bar {
+    width: 100%;
+    background-color: var(--primary-color); /* Basalt Black background */
+    color: var(--white);
+    padding: 30px 20px;
+    margin-top: 50px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact-text {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--accent-color); /* Sandstone Gold */
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.contact-inputs {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Spacing between input fields and button */
+}
+
+.contact-inputs input {
+    padding: 12px 15px;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    font-size: 1em;
+    flex-grow: 1;
+    max-width: 300px;
+    text-align: right; /* Default text alignment for Arabic input */
+}
+
+/* Ensure the button uses the existing primary button style */
+.bottom-contact-bar .primary-btn {
+    flex-shrink: 0;
+    padding: 12px 30px;
+    font-size: 1em;
+}
+
+/* RTL adjustment for input text direction */
+html[dir="rtl"] .contact-inputs input {
+    text-align: right;
+}
+
+/* LTR adjustment for input text direction when English is selected */
+html[dir="ltr"] .contact-inputs input {
+    text-align: left;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .contact-inputs {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 10px;
+    }
+    .contact-inputs input {
+        max-width: 100%;
+        text-align: center !important; /* Center text for small screens */
+    }
+    .bottom-contact-bar .primary-btn {
+        width: 100%;
+    }
+}
