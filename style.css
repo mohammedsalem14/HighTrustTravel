@@ -1,14 +1,15 @@
 /* --- THEME COLORS & BASE STYLES --- */
 :root {
-    /* New Palette: Ancient Sandstone & Nile Green */
-    --primary-color: #28282A; /* Basalt Black / Deep Charcoal */
-    --primary-light: #3D3D3F; /* Slightly lighter basalt for gradients */
-    --accent-color: #D4AF37;  /* Sandstone Gold */
-    --secondary-accent: #008080; /* Nile Green */
-    --secondary-accent-dark: #006060; /* Darker Nile Green for gradients */
-    --background-color: #FDF5E6; /* Pale Cream/Sand */
-    --light-gray: #eee;
-    --text-color: #333333;
+    /* New Formal Palette: Deep Navy & Classic Bronze */
+    --primary-color: #1A233A;      /* Deep Midnight Blue / Navy */
+    --primary-light: #2C3E50;      /* Slightly lighter Slate Blue for gradients */
+    --accent-color: #B8860B;       /* Classic Dark Goldenrod / Bronze */
+    --accent-light: #D4AF37;       /* Lighter Gold for subtle hover effects */
+    --secondary-accent: #008080;   /* Muted Teal / Deep Sea */
+    --secondary-accent-dark: #005A5A; /* Darker Teal for gradients */
+    --background-color: #F4F6F8;   /* Clean Off-White / Light Mist */
+    --light-gray: #E8EBEF;         /* Formal Light Gray for list items */
+    --text-color: #333333;         /* Standard Dark Text */
     --white: #ffffff;
 }
 
@@ -42,13 +43,14 @@ html[dir="rtl"] body {
 
 /* --- 1. HEADER & NAVIGATION --- */
 header {
-    background: linear-gradient(to right, var(--primary-color), var(--primary-light)); /* Linear Gradient */
+    /* Use the Primary Deep Navy */
+    background: linear-gradient(to right, var(--primary-color), var(--primary-light));
     color: var(--white);
     padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(26, 35, 58, 0.3); /* Darker shadow from primary color */
 }
 
 .logo {
@@ -58,7 +60,7 @@ header {
 }
 
 .logo-icon {
-    color: var(--accent-color);
+    color: var(--accent-color); /* Classic Bronze */
     margin-right: 5px;
 }
 
@@ -71,7 +73,7 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--accent-color);
+    color: var(--accent-light); /* Lighter Gold on hover */
 }
 
 .settings-btn {
@@ -87,12 +89,12 @@ nav a:hover {
 
 .settings-btn:hover {
     background-color: var(--accent-color);
-    color: var(--primary-color);
+    color: var(--primary-color); /* Dark text on gold */
 }
 
 /* --- 2. HERO SECTION --- */
 .hero {
-    background: url('https://via.placeholder.com/1500x400/987654/ffffff?text=Egyptian+Road+Trip') no-repeat center center/cover; /* Placeholder image - replace with a real one */
+    background: url('https://via.placeholder.com/1500x400/1A233A/ffffff?text=Formal+Corporate+Theme') no-repeat center center/cover;
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -110,8 +112,9 @@ nav a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to right, var(--secondary-accent-dark) 0%, var(--primary-color) 100%); /* Linear Gradient Overlay */
-    opacity: 0.7; /* Adjust opacity as needed for text readability */
+    /* Use the new Primary and Secondary colors for the overlay */
+    background: linear-gradient(to right, var(--secondary-accent-dark) 0%, var(--primary-color) 100%);
+    opacity: 0.8; 
     z-index: 1;
 }
 
@@ -119,14 +122,14 @@ nav a:hover {
     font-size: 2.5em;
     margin-bottom: 20px;
     z-index: 2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
 }
 
 .booking-widget {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly less transparency */
     padding: 20px 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     z-index: 2;
     color: var(--primary-color);
     text-align: center;
@@ -138,7 +141,7 @@ nav a:hover {
 }
 
 .primary-btn {
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); /* Classic Bronze */
     color: var(--primary-color);
     border: none;
     padding: 10px 25px;
@@ -147,10 +150,12 @@ nav a:hover {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .primary-btn:hover {
-    background-color: #EBC85B; /* Lighter Sandstone */
+    background-color: var(--accent-light); /* Lighter Gold on hover */
+    color: var(--primary-color); 
 }
 
 /* --- 3. MAIN CONTENT STYLES --- */
@@ -167,7 +172,7 @@ nav a:hover {
 }
 
 .text-content h3 {
-    color: var(--secondary-accent);
+    color: var(--secondary-accent); /* Muted Teal for secondary titles */
     margin-top: 30px;
     font-size: 1.4em;
 }
@@ -182,6 +187,7 @@ nav a:hover {
     margin-bottom: 10px;
     padding: 10px 15px;
     border-left: 5px solid var(--accent-color);
+    border-radius: 2px; /* Slight roundness for professionalism */
 }
 
 .slogan-line {
@@ -192,7 +198,8 @@ nav a:hover {
     padding: 20px;
     border: 1px dashed var(--accent-color);
     margin-top: 30px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--background-color); /* Use background color for cleaner look */
+    border-radius: 4px;
 }
 
 /* RTL Adjustments */
@@ -217,22 +224,22 @@ html[dir="rtl"] nav a {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.5); /* Slightly darker overlay */
 }
 
 .modal-content {
-    background-color: var(--background-color);
+    background-color: var(--white); /* Pure white for a crisp look */
     margin: 10% auto;
     padding: 30px;
     border: 1px solid var(--primary-color);
     width: 80%;
     max-width: 400px;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow */
 }
 
 .close-btn {
-    color: #aaa;
+    color: #888; /* Softer gray */
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -258,7 +265,7 @@ html[dir="rtl"] nav a {
 
 .setting-group p {
     font-weight: 700;
-    color: var(--secondary-accent);
+    color: var(--primary-color); /* Primary color for emphasis */
     margin-bottom: 10px;
 }
 
@@ -282,26 +289,26 @@ html[dir="rtl"] nav a {
 }
 
 .font-controls button:hover {
-    background-color: var(--accent-color);
+    background-color: var(--secondary-accent); /* Teal background on hover */
     color: var(--white);
-    border-color: var(--accent-color);
+    border-color: var(--secondary-accent);
 }
 
 /* --- 5. BOTTOM CONTACT BAR --- */
 .bottom-contact-bar {
     width: 100%;
-    background-color: var(--primary-color); /* Basalt Black background */
+    background-color: var(--primary-color); /* Deep Navy background */
     color: var(--white);
     padding: 30px 20px;
     margin-top: 50px;
     text-align: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .contact-text {
     font-size: 1.8em;
     font-weight: 700;
-    color: var(--accent-color); /* Sandstone Gold */
+    color: var(--accent-color); /* Classic Bronze */
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
@@ -311,7 +318,7 @@ html[dir="rtl"] nav a {
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    gap: 15px; /* Spacing between input fields and button */
+    gap: 15px; 
 }
 
 .contact-inputs input {
@@ -321,7 +328,8 @@ html[dir="rtl"] nav a {
     font-size: 1em;
     flex-grow: 1;
     max-width: 300px;
-    text-align: right; /* Default text alignment for Arabic input */
+    text-align: right; 
+    color: var(--primary-color); /* Input text color */
 }
 
 /* Ensure the button uses the existing primary button style */
@@ -350,7 +358,7 @@ html[dir="ltr"] .contact-inputs input {
     }
     .contact-inputs input {
         max-width: 100%;
-        text-align: center !important; /* Center text for small screens */
+        text-align: center !important; 
     }
     .bottom-contact-bar .primary-btn {
         width: 100%;
