@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="text-base">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="High Trust Travel - Trip Booking" data-ar="هاي تراست ترافل - حجز الرحلات">
+        High Trust Travel - Trip Booking
+    </title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Fonts for English (Inter/Roboto) and Arabic (Noto Sans Arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Load Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Tailwind Configuration and Custom Modal CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Inter is the default, with fallbacks for clear text support
+                        sans: ['Inter', 'Roboto', 'Noto Sans Arabic', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-navy': '#1A233A',      /* Deep Midnight Blue */
+                        'accent-bronze': '#B8860B',     /* Classic Dark Goldenrod */
+                        'secondary-teal': '#008080',    /* Muted Teal */
+                        'light-mist': '#F4F6F8',        /* Light background */
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Base styling for smooth font size transitions */
+        .content-transition {
+            transition: font-size 0.3s ease;
+        }
+
+        /* Custom Modal Styling (for settings and submission feedback) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 10vh auto;
+            padding: 2rem;
+            border-radius: 0.75rem; /* Slightly larger radius */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 450px; /* Slightly wider */
+        }
+        
+        /* RTL-specific adjustments */
+        [dir="rtl"] .trip-form input,
+        [dir="rtl"] .trip-form input::placeholder {
+            text-align: right;
+        }
+        [dir="rtl"] .form-group label i {
+            margin-left: 0.5rem;
+            margin-right: 0;
+        }
+        [dir="ltr"] .form-group label i {
+            margin-right: 0.5rem;
+            margin-left: 0;
+        }
+        
+    </style>
+</head>
+<body class="font-sans bg-light-mist content-transition">
+
+    <!-- HEADER -->
+    <header class="bg-primary-navy text-white p-4 shadow-lg flex justify-between items-center sticky top-0 z-20">
+        <div class="text-2xl font-bold tracking-wider">
+            <span class="text-accent-bronze mr-2">🚎</span> HIGH TRUST TRAVEL
+        </div>
+        <nav class="flex space-x-4">
+            <!-- Updated Contact link to potentially open a contact modal or section later -->
+            <a href="#booking-form" class="text-white hover:text-accent-bronze transition duration-300" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+        </nav>
+        <button class="settings-btn bg-transparent border-2 border-accent-bronze text-accent-bronze text-xl p-2 rounded hover:bg-accent-bronze hover:text-primary-navy transition duration-300" id="settingsBtn" title="Settings">⚙️</button>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-96 flex flex-col justify-center items-center text-center p-4 bg-cover bg-center" style="background-image: url('https://placehold.co/1500x400/1A233A/ffffff?text=Travel+Egypt+Bus');">
+        <div class="absolute inset-0 bg-primary-navy opacity-70 z-10"></div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white z-20 mb-6 drop-shadow-lg" data-en="Travel Egypt with Confidence. High Trust Transportation." data-ar="سافر في مصر بثقة. هاي تراست للنقل.">
+            Travel Egypt with Confidence. High Trust Transportation.
+        </h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="z-20">
+            <a href="#booking-form" class="inline-block bg-accent-bronze text-primary-navy font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-yellow-600 transition duration-300 text-lg" data-en="Start Booking Now" data-ar="ابدأ الحجز الآن">
+                Start Booking Now
+            </a>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT AREA (used for font size scaling) -->
+    <main class="max-w-4xl mx-auto px-4 content-transition" id="mainContent">
+
+        <!-- BOOKING FORM SECTION -->
+        <section id="booking-form" class="content-transition">
+            <article class="bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-2xl -mt-16 relative z-10 border-t-8 border-accent-bronze">
+                
+                <!-- English Content -->
+                <div class="language-content en-content" dir="ltr">
+                    <h2 class="text-3xl font-bold text-primary-navy mb-3 text-center">Book Your Trip</h2>
+                    <p class="text-gray-600 text-center mb-8">Fill in the details below to receive a personalized quote for your journey.</p>
+                    
+                    <form class="trip-form space-y-6" id="enForm" action="https://api.web3forms.com/submit" method="POST">
+                        
+                        <!-- Web3Forms Access Key (REQUIRED) -->
+                        <input type="hidden" name="access_key" value="a39fb9a0-4b69-4e3e-8a4b-82896359efb8">
+
+                        <div class="form-group">
+                            <label for="pickupLocation" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-map-marker-alt text-accent-bronze mr-2"></i> Pickup Location (Current Location)</label>
+                            <input type="text" id="pickupLocation" name="Pickup_Location" 
+                                data-placeholder-en="e.g., Cairo International Airport (CAI)" 
+                                data-placeholder-ar="مثال: مطار القاهرة الدولي" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dropoffLocation" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-location-arrow text-accent-bronze mr-2"></i> Drop-off Location (Destination)</label>
+                            <input type="text" id="dropoffLocation" name="Dropoff_Location" 
+                                data-placeholder-en="e.g., Luxor Temple" 
+                                data-placeholder-ar="مثال: معبد الأقصر" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200" required>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="form-group flex-1">
+                                <!-- NAME field renamed to 'Name' for Web3Forms -->
+                                <label for="fullName" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-user text-accent-bronze mr-2"></i> Full Name</label>
+                                <input type="text" id="fullName" name="Name" 
+                                    data-placeholder-en="John Doe" 
+                                    data-placeholder-ar="الاسم بالكامل" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200" required>
+                            </div>
+                            <div class="form-group flex-1">
+                                <!-- EMAIL field renamed to 'Email' for Web3Forms -->
+                                <label for="email" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-envelope text-accent-bronze mr-2"></i> Email Address</label>
+                                <input type="email" id="email" name="Email" 
+                                    data-placeholder-en="name@example.com" 
+                                    data-placeholder-ar="بريدك الإلكتروني" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-phone text-accent-bronze mr-2"></i> Phone Number (including country code)</label>
+                            <input type="tel" id="phone" name="Phone_Number" 
+                                data-placeholder-en="+20 XXX XXX XXXX" 
+                                data-placeholder-ar="٢٠+ ٠٠٠ ٠٠٠ ٠٠٠٠" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tripDate" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-calendar-alt text-accent-bronze mr-2"></i> Trip Date</label>
+                            <input type="date" id="tripDate" name="Trip_Date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200" required>
+                        </div>
+
+                        <button type="submit" class="w-full md:w-auto mx-auto mt-6 primary-btn bg-secondary-teal text-white hover:bg-secondary-teal/90 py-3 px-8 rounded-lg text-lg font-bold transition duration-300 shadow-md" data-en="Submit Booking Request" data-ar="إرسال طلب الحجز">Submit Booking Request</button>
+                    </form>
+                </div>
+
+                <!-- Arabic Content (Hidden by default) -->
+                <div class="language-content ar-content hidden" dir="rtl">
+                    <h2 class="text-3xl font-bold text-primary-navy mb-3 text-center">احجز رحلتك</h2>
+                    <p class="text-gray-600 text-center mb-8">املأ التفاصيل أدناه لتلقي عرض سعر مخصص لرحلتك.</p>
+                    
+                    <form class="trip-form space-y-6" id="arForm" action="https://api.web3forms.com/submit" method="POST">
+
+                        <!-- Web3Forms Access Key (REQUIRED) -->
+                        <input type="hidden" name="access_key" value="a39fb9a0-4b69-4e3e-8a4b-82896359efb8">
+
+                        <div class="form-group">
+                            <label for="pickupLocationAr" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-map-marker-alt text-accent-bronze ml-2"></i> موقع الاستلام (الموقع الحالي)</label>
+                            <input type="text" id="pickupLocationAr" name="Pickup_Location" 
+                                data-placeholder-en="e.g., Cairo International Airport (CAI)" 
+                                data-placeholder-ar="مثال: مطار القاهرة الدولي" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200 text-right" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dropoffLocationAr" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-location-arrow text-accent-bronze ml-2"></i> موقع التسليم (الوجهة)</label>
+                            <input type="text" id="dropoffLocationAr" name="Dropoff_Location" 
+                                data-placeholder-en="e.g., Luxor Temple" 
+                                data-placeholder-ar="مثال: معبد الأقصر" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200 text-right" required>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="form-group flex-1">
+                                <!-- NAME field renamed to 'Name' for Web3Forms -->
+                                <label for="fullNameAr" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-user text-accent-bronze ml-2"></i> الاسم بالكامل</label>
+                                <input type="text" id="fullNameAr" name="Name" 
+                                    data-placeholder-en="John Doe" 
+                                    data-placeholder-ar="الاسم بالكامل" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200 text-right" required>
+                            </div>
+                            <div class="form-group flex-1">
+                                <!-- EMAIL field renamed to 'Email' for Web3Forms -->
+                                <label for="emailAr" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-envelope text-accent-bronze ml-2"></i> البريد الإلكتروني</label>
+                                <input type="email" id="emailAr" name="Email" 
+                                    data-placeholder-en="name@example.com" 
+                                    data-placeholder-ar="بريدك الإلكتروني" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200 text-right" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneAr" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-phone text-accent-bronze ml-2"></i> رقم الهاتف (بما في ذلك رمز الدولة)</label>
+                            <input type="tel" id="phoneAr" name="Phone_Number" 
+                                data-placeholder-en="+20 XXX XXX XXXX" 
+                                data-placeholder-ar="٢٠+ ٠٠٠ ٠٠٠ ٠٠٠٠" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200 text-right" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tripDateAr" class="block font-semibold text-secondary-teal mb-2"><i class="fas fa-calendar-alt text-accent-bronze ml-2"></i> تاريخ الرحلة</label>
+                            <input type="date" id="tripDateAr" name="Trip_Date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-bronze focus:border-accent-bronze transition duration-200" required>
+                        </div>
+
+                        <button type="submit" class="w-full md:w-auto mx-auto mt-6 primary-btn bg-secondary-teal text-white hover:bg-secondary-teal/90 py-3 px-8 rounded-lg text-lg font-bold transition duration-300 shadow-md" data-en="Submit Booking Request" data-ar="إرسال طلب الحجز">إرسال طلب الحجز</button>
+                    </form>
+                </div>
+            </article>
+        </section>
+
+        <!-- FOOTER / CONTACT INFO -->
+        <footer class="mt-12 mb-6 p-4 bg-primary-navy rounded-xl shadow-lg text-white text-center">
+            <h3 class="text-xl font-bold text-accent-bronze mb-2" data-en="High Trust Travel Contact" data-ar="اتصال هاي تراست ترافل">High Trust Travel Contact</h3>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-8 text-sm">
+                <!-- Company Name and Location -->
+                <div class="flex items-center">
+                    <i class="fas fa-building mr-2 text-secondary-teal"></i>
+                    <span data-en="HQ: Cairo, Egypt" data-ar="المقر الرئيسي: القاهرة، مصر">HQ: Cairo, Egypt</span>
+                </div>
+                <!-- Phone Number -->
+                <div class="flex items-center">
+                    <i class="fas fa-phone mr-2 text-secondary-teal"></i>
+                    <span data-en="+20 100 123 4567" data-ar="٠٠٢٠ ١٠٠ ١٢٣ ٤٥٦٧">+20 100 123 4567</span>
+                </div>
+                <!-- Email Address -->
+                <div class="flex items-center">
+                    <i class="fas fa-envelope mr-2 text-secondary-teal"></i>
+                    <span>booking@hightrust.eg</span>
+                </div>
+            </div>
+        </footer>
+        
+    </main>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn text-gray-500 hover:text-primary-navy transition duration-300 text-3xl font-bold float-right cursor-pointer" data-modal="settings">&times;</span>
+            <h3 class="text-xl font-bold text-primary-navy border-b border-accent-bronze pb-2 mb-4" data-en="Accessibility & Preferences" data-ar="إعدادات الوصول والتفضيلات">Accessibility & Preferences</h3>
+
+            <div class="setting-group mb-6">
+                <p class="font-semibold text-primary-navy mb-2" data-en="Select Language:" data-ar="اختر اللغة:">Select Language:</p>
+                <div class="radio-group flex space-x-6">
+                    <label class="cursor-pointer">
+                        <input type="radio" name="language" value="en" checked> English
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="language" value="ar"> العربية
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <p class="font-semibold text-primary-navy mb-2" data-en="Font Size:" data-ar="حجم الخط:">Font Size:</p>
+                <div class="font-controls flex space-x-2">
+                    <button id="font-small" class="p-2 border border-secondary-teal text-secondary-teal font-bold rounded hover:bg-secondary-teal hover:text-white transition duration-200">A-</button>
+                    <button id="font-medium" class="p-2 border border-secondary-teal text-secondary-teal font-bold rounded hover:bg-secondary-teal hover:text-white transition duration-200">A</button>
+                    <button id="font-large" class="p-2 border border-secondary-teal text-secondary-teal font-bold rounded hover:bg-secondary-teal hover:text-white transition duration-200">A+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBMISSION FEEDBACK MODAL (Success/Error/Loading) -->
+    <div id="submissionModal" class="modal">
+        <div class="modal-content text-center">
+            <span class="close-btn text-gray-500 hover:text-primary-navy transition duration-300 text-3xl font-bold float-right cursor-pointer" data-modal="submission">&times;</span>
+            <div id="modalContentBody">
+                <!-- Content injected by JS -->
+                <i class="fas fa-spin fa-circle-notch text-secondary-teal text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold text-primary-navy mb-2" data-en="Sending Request..." data-ar="جاري إرسال الطلب...">Sending Request...</h3>
+                <p class="text-gray-600" data-en="Please wait while we process your booking details." data-ar="يرجى الانتظار بينما نقوم بمعالجة تفاصيل حجزك.">Please wait while we process your booking details.</p>
+            </div>
+            <button id="modalCloseButton" class="hidden mt-6 primary-btn bg-secondary-teal text-white hover:bg-secondary-teal/90 py-2 px-6 rounded-lg font-bold transition duration-300 shadow-md" data-en="Close" data-ar="إغلاق">Close</button>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT FOR SETTINGS AND LANGUAGE LOGIC -->
+    <script>
+        const html = document.documentElement;
+        const settingsModal = document.getElementById('settingsModal');
+        const submissionModal = document.getElementById('submissionModal');
+        const modalContentBody = document.getElementById('modalContentBody');
+        const modalCloseButton = document.getElementById('modalCloseButton');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const langRadios = document.querySelectorAll('input[name="language"]');
+        const fontSmall = document.getElementById('font-small');
+        const fontMedium = document.getElementById('font-medium');
+        const fontLarge = document.getElementById('font-large');
+        
+        // Form references are initialized here:
+        const enForm = document.getElementById('enForm');
+        const arForm = document.getElementById('arForm');
+
+        // --- 1. Modal Control ---
+        settingsBtn.onclick = () => settingsModal.style.display = 'block';
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.onclick = () => {
+                const modalType = btn.getAttribute('data-modal');
+                if (modalType === 'settings') {
+                    settingsModal.style.display = 'none';
+                } else if (modalType === 'submission') {
+                    submissionModal.style.display = 'none';
+                }
+            };
+        });
+
+        window.onclick = (event) => {
+            if (event.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+            if (event.target === submissionModal) {
+                submissionModal.style.display = 'none';
+            }
+        }
+
+        // --- 2. Language Control ---
+        function switchLanguage(lang) {
+            html.lang = lang;
+            const isRTL = (lang === 'ar');
+            html.dir = isRTL ? 'rtl' : 'ltr';
+
+            // Show/Hide content blocks
+            document.querySelectorAll('.language-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll(`.${lang}-content`).forEach(el => el.classList.remove('hidden'));
+
+            // Update all elements with data- attributes (Titles, Buttons, Labels, etc.)
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    // Check if it's an input/title/button that uses inner text
+                    if (el.tagName === 'TITLE') {
+                        el.textContent = text;
+                    } else if (el.tagName !== 'INPUT') { // Don't touch input values
+                        el.textContent = text;
+                    }
+                }
+            });
+
+            // Handle placeholders separately using custom data attributes
+            document.querySelectorAll('input[data-placeholder-en]').forEach(input => {
+                const placeholder = input.getAttribute(`data-placeholder-${lang}`);
+                if (placeholder) {
+                    input.placeholder = placeholder;
+                }
+            });
+        }
+
+        langRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => switchLanguage(e.target.value));
+        });
+
+        // Set initial state (default to English)
+        switchLanguage('en'); 
+
+        // --- 3. Font Size Control ---
+        function setFontSize(sizeClass) {
+            // Reset existing font size classes on the root element
+            html.classList.remove('text-base', 'text-lg', 'text-sm');
+            
+            // Apply new font size class
+            html.classList.add(sizeClass);
+        }
+
+        fontSmall.onclick = () => setFontSize('text-sm');      // smaller
+        fontMedium.onclick = () => setFontSize('text-base');    // default
+        fontLarge.onclick = () => setFontSize('text-lg');       // larger
+
+
+        // --- 4. Form Submission (AJAX via Web3Forms) ---
+        
+        // Function to display the submission modal with dynamic content
+        function showSubmissionFeedback(isSuccess, message) {
+            const lang = html.lang;
+            modalCloseButton.classList.remove('hidden');
+            submissionModal.style.display = 'block';
+            
+            let iconClass = isSuccess ? 'fas fa-check-circle text-secondary-teal' : 'fas fa-times-circle text-red-500';
+            let titleText = isSuccess 
+                ? (lang === 'ar' ? 'تم الإرسال بنجاح' : 'Request Sent Successfully!')
+                : (lang === 'ar' ? 'خطأ في الإرسال' : 'Submission Error');
+
+            modalContentBody.innerHTML = `
+                <i class="${iconClass} text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold text-primary-navy mb-2">${titleText}</h3>
+                <p class="text-gray-600">${message}</p>
+            `;
+            
+            modalCloseButton.onclick = () => submissionModal.style.display = 'none';
+        }
+
+        // Function to show the loading state
+        function showLoading() {
+            const lang = html.lang;
+            modalCloseButton.classList.add('hidden');
+            submissionModal.style.display = 'block';
+            modalContentBody.innerHTML = `
+                <i class="fas fa-spin fa-circle-notch text-accent-bronze text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold text-primary-navy mb-2">${lang === 'ar' ? 'جاري الإرسال...' : 'Sending Request...'}</h3>
+                <p class="text-gray-600">${lang === 'ar' ? 'يرجى الانتظار بينما نقوم بمعالجة تفاصيل حجزك.' : 'Please wait while we process your booking details.'}</p>
+            `;
+        }
+
+        const handleFormSubmission = async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const formLang = html.lang;
+
+            showLoading();
+
+            try {
+                // Using the native form action and method
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json' // Crucial for Web3Forms AJAX
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    const successMessage = formLang === 'ar'
+                        ? 'شكراً لك! لقد تم إرسال طلب حجزك بنجاح. سنتواصل معك قريباً جداً لتأكيد التفاصيل.'
+                        : 'Thank you! Your booking request has been successfully submitted. We will contact you very soon to confirm the details.';
+                    showSubmissionFeedback(true, successMessage);
+                    form.reset();
+                } else {
+                    let errorMessage = formLang === 'ar' 
+                        ? 'حدث خطأ أثناء إرسال النموذج. يرجى التحقق من المدخلات والمحاولة مرة أخرى.'
+                        : 'An error occurred during submission. Please check your inputs and try again.';
+
+                    if (result.message) {
+                         // Web3Forms might return a specific error message
+                        errorMessage = formLang === 'ar' ? `خطأ: ${result.message}` : `Error: ${result.message}`;
+                    }
+                    showSubmissionFeedback(false, errorMessage);
+                }
+
+            } catch (error) {
+                console.error('Submission failed:', error);
+                const networkError = formLang === 'ar' 
+                    ? 'فشل الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت.' 
+                    : 'Network error. Please check your internet connection and try again.';
+                showSubmissionFeedback(false, networkError);
+            }
+        };
+
+        // Attach event listeners to both forms
+        // FIX: Added null checks to prevent errors if the elements weren't fully loaded, 
+        // which would stop script execution before the listener is attached, leading to a page reload.
+        if (enForm) {
+            enForm.addEventListener('submit', handleFormSubmission);
+        }
+        if (arForm) {
+            arForm.addEventListener('submit', handleFormSubmission);
+        }
+    </script>
+</body>
+</html>
